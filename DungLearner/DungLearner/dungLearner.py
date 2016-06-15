@@ -4,7 +4,6 @@ import logging
 
 class dungLearner:
     # This method looks at the nodes populated by the post and the rating. Based on this it returns the ideal grounded sets.
-
     def __init__(self, noA, noB, noC, noD, noE, noF, rating):
 
         # We initialise the dung solver by instatiating the list of graph members
@@ -55,16 +54,15 @@ class dungLearner:
                     if key in attacks:
                         attacks.remove(key)
         
-        logging.info('Node numbers: ')
+        logging.info('Arguments per Node: ')
         logging.info(self.graphMembers)
 
-        logging.info('Node members: ')
+        logging.info('Populated Nodes: ')
         logging.info(self.graphMembersList)
 
 
         self.getDesiredGroundedSet()
         self.listOfPlausibleAttacks, self.allAttackGraphs = self.generateAllDungGraphs()
-
 
     def getDesiredGroundedSet(self):
         for node, attacks in self.graphOutward.items():
@@ -78,10 +76,9 @@ class dungLearner:
                 if node in self.positiveNodes:
                     self.groundedExtension.append(node)
         
-        logging.info('The grounded set: ')
+        logging.info('Desired grounded set: ')
         logging.info(self.groundedExtension)
         
-
     def generateAllDungGraphs(self):
 
         allPossibleOutwardGraphs = []
@@ -99,7 +96,7 @@ class dungLearner:
         
         # Build a list of all possible Dung graphs. This is based on the attack list
         allAttackGraphs = list(product((1, 0), repeat = len(listOfAttacks)))
-        logging.info('No of Dung Graphs: ' + str(len(allAttackGraphs)))
+        logging.info('No of Possible Dung Graphs: ' + str(len(allAttackGraphs)))
 
         return listOfAttacks, allAttackGraphs
 
@@ -123,7 +120,6 @@ class dungLearner:
                     graphOutward[attacker].append(victim)
 
         return graphOutward
-
 
     def checkGraphPositive(self, graph):
         
@@ -192,7 +188,7 @@ class dungLearner:
                 if set(groundedExtension[0]) == set(self.groundedExtension):
                     groundedLists.append(attackGraph)
 
-        logging.info('No of grounded graphs found: ' + str(len(groundedLists)))
+        logging.info('No of correlated grounded graphs: ' + str(len(groundedLists)))
 
         # Instantiate empty weighted graph
         weightedGraph = [0] * len(globalAttacksList)

@@ -31,15 +31,24 @@ for idx, post in enumerate(posts):
     globalDungGraph.updateGlobalDung(weightedGraph)
 
 
-
+logging.info('                                        ')
 logging.info('----------------------------------------')
 logging.info('---------------Summary------------------')
 logging.info('----------------------------------------')
+logging.info('***Node Meanings***')
+logging.info('A - Positive Experience')
+logging.info('B - Negative Experience')
+logging.info('C - Symptoms OK')
+logging.info('D - Symptoms Not OK')
+logging.info('E - No Side Effects')
+logging.info('F - Side Effects Present')
+logging.info('                                        ')
 logging.info('Attack                        Weight')   
+
 for idx, weight in enumerate(globalDungGraph.globalWeightedGraph):
 
     
-    logging.info(str(globalDungGraph.globalAttackList[idx]) + '\t\t\t' + str(weight))
+    logging.info(str((globalDungGraph.globalAttackList[idx])[0]) + (' -> ') + str((globalDungGraph.globalAttackList[idx])[1]) + '\t\t\t' + str(weight))
 
 
 print('here')
